@@ -1,15 +1,16 @@
-"use client";
-import React from "react";
-import { FeaturesSectionDemo } from "@/app/UI/acternity/BentoGrid";
+// File: Solutions.server.tsx (Server Component)
 
-export const Solutions =React.forwardRef<HTMLElement>((props, ref) =>{
+import React from "react";
+import { FeaturesSectionDemoClient } from "@/app/UI/acternity/BentoGridClient"; // Dynamically imported client-side component
+
+const Solutions = React.forwardRef<HTMLElement, React.ComponentPropsWithoutRef<"section">>((props, ref) => {
   return (
-    <section className="relative flex flex-col w-full text-left py-12"  ref={ref}>
-      <FeaturesSectionDemo />
+    <section className="relative flex flex-col w-full text-left py-12" ref={ref} {...props}>
+      <FeaturesSectionDemoClient />
     </section>
   );
 });
 
-Solutions.displayName = "SolutionsSection";
+Solutions.displayName = "SolutionsSection"; // Helpful for debugging purposes
 
-
+export default Solutions;

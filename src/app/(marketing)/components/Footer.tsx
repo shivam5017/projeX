@@ -1,12 +1,11 @@
-'use client'
-import { PlaceHolder } from "@/app/UI/PlaceHolder";
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
 
-export const Footer= React.forwardRef<HTMLElement>((props, ref) => {
+// Server-rendered Footer Section
+const Footer = React.forwardRef<HTMLElement, React.ComponentPropsWithoutRef<"section">>((props, ref) => {
   return (
     <>
-      <section className="bg-primary text-white flex flex-col sm:flex-row justify-between h-auto sm:h-80 px-6 py-10" ref={ref}>
+      <section className="bg-primary text-white flex flex-col sm:flex-row justify-between h-auto sm:h-80 px-6 py-10" ref={ref} {...props}>
         {/* Hero Section */}
         <main className="flex flex-col items-start justify-start flex-grow text-center sm:text-left mb-8 sm:mb-0">
           <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold mb-6 sm:mb-8">
@@ -28,7 +27,6 @@ export const Footer= React.forwardRef<HTMLElement>((props, ref) => {
 
         {/* Footer Section */}
         <footer className="py-6 flex flex-col justify-center items-center gap-8 sm:gap-20">
-          <PlaceHolder />
           <div className="flex flex-row items-center justify-center text-center sm:space-x-4 space-y-4 sm:space-y-0">
             <Image
               src="/Images/logo.png"
@@ -49,3 +47,6 @@ export const Footer= React.forwardRef<HTMLElement>((props, ref) => {
     </>
   );
 });
+
+Footer.displayName = "FooterSection"; // Helpful for debugging
+export default Footer;

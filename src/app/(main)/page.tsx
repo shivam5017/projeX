@@ -1,9 +1,10 @@
 import React from 'react'
+import Dashboard from './components/Dashboard';
 
-const Page = () => {
+const ProjexMain = () => {
   return (
-    <div>Page</div>
+   <Dashboard />
   )
 }
 
-export default Page
+export default ProjexMain;

@@ -1,36 +1,52 @@
 "use client";
-import React, { useRef } from "react";
-import HeroComponent from "./components/Hero";
-import TrustedBy from "./components/TrustedBy";
-import {Solutions} from "./components/Solutions";
-import { Navbar } from "../UI/Navbar";
-import {Footer} from "./components/Footer";
+import React, { useRef, useCallback, useEffect, useState } from "react";
+import dynamic from "next/dynamic";
 
+
+const HeroComponent = dynamic(() => import("./components/Hero"), { ssr: false });
+const TrustedBy = dynamic(() => import("./components/TrustedBy"), { ssr: false });
+const Solutions = dynamic(() => import("./components/Solutions"), { ssr: false });
+const Navbar = dynamic(() => import("../UI/Navbar"), { ssr: false });
+const Footer = dynamic(() => import("./components/Footer"), { ssr: false });
 
 const MarketingPage = () => {
   const homeRef = useRef<HTMLElement>(null);
   const solutionsRef = useRef<HTMLElement>(null);
   const requestRef = useRef<HTMLElement>(null);
 
-  const scrollToSection = (sectionRef: React.RefObject<HTMLElement>) => {
+  // Use state to check if client-side rendering is done
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true); // Update after the initial render on the client
+  }, []);
+
+  const scrollToSection = useCallback((sectionRef: React.RefObject<HTMLElement>) => {
     if (sectionRef.current) {
       sectionRef.current.scrollIntoView({ behavior: "smooth" });
     }
-  };
+  }, []);
+
+  if (!isClient) {
+    return null; 
+  }
 
   return (
-    <div>
-       <Navbar 
+    <>
+ 
+      <Navbar 
         scrollToSection={scrollToSection} 
         homeRef={homeRef} 
         solutionsRef={solutionsRef} 
-        requestRef={requestRef}
+        requestRef={requestRef} 
       />
-      <HeroComponent ref={homeRef}/>
+      
+      
+      <HeroComponent ref={homeRef} />
       <TrustedBy />
       <Solutions ref={solutionsRef} />
-      <Footer ref={requestRef}/>
-    </div>
+      <Footer ref={requestRef} />
+    </>
   );
 };
 

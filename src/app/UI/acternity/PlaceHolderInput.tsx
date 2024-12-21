@@ -13,7 +13,7 @@ export function PlaceholdersAndVanishInput({
   placeholder: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  value: string;  // Type for value prop
+  value: string; 
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const newDataRef = useRef<any[]>([]);
@@ -70,7 +70,7 @@ export function PlaceholdersAndVanishInput({
       r: 1,
       color: `rgba(${color[0]}, ${color[1]}, ${color[2]}, ${color[3]})`,
     }));
-  }, [value]);  // Re-run the drawing when value changes
+  }, [value]);  
 
   useEffect(() => {
     draw();

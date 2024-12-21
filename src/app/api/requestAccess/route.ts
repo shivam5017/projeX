@@ -54,15 +54,6 @@ export async function POST(req: Request) {
       { status: 200 }
     );
   } catch (error: unknown) {
-    if (error instanceof Prisma.PrismaClientKnownRequestError) {
-      if (error.code === 'P2002') {
-        return NextResponse.json(
-          { error: 'Email already exists in the database', notification: 'Email Already Exists' },
-          { status: 400 }
-        );
-      }
-    }
-
     return NextResponse.json(
       { error: 'Failed to subscribe user', notification: 'Something Went Wrong, Try Again later!' },
       { status: 500 }
