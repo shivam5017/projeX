@@ -12,3 +12,10 @@ model User {
   email     String @unique
   createdAt DateTime @default(now())
 }
+
+model OnBoardedUser {
+  id        Int    @id @default(autoincrement())
+  wallet    String @unique
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

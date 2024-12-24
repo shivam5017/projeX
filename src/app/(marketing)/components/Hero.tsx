@@ -1,16 +1,22 @@
-
 import React from "react";
 import Image from "next/image";
 import { PlaceHolder } from "@/app/UI/PlaceHolder";
+import { BgSvg } from "@/app/UI/SVGS/bgsvg";
+import ReactDOMServer from "react-dom/server";
 
-// This is a Server Component
 const HeroComponent = React.forwardRef<HTMLElement>((props, ref) => {
+  const svgString = ReactDOMServer.renderToStaticMarkup(<BgSvg />);
+  const base64Svg = `data:image/svg+xml;base64,${btoa(svgString)}`;
+
   return (
     <section
       ref={ref}
-      className="relative flex flex-col items-center w-full h-screen text-center rounded-b-2xl font-sans overflow-hidden bg-cover bg-center bg-repeat"
+      className="relative flex flex-col items-center w-full h-screen text-center rounded-b-2xl font-sans overflow-hidden"
       style={{
-        backgroundImage: "url('/Images/bg.svg')", // Static SVG background
+        backgroundImage: `url('${base64Svg}')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "repeat",
         imageRendering: "pixelated",
       }}
     >
@@ -30,11 +36,9 @@ const HeroComponent = React.forwardRef<HTMLElement>((props, ref) => {
           <Image
             src="/Images/overview.png"
             alt="Financial Overview"
-            layout="responsive"
-            width={1200}
-            height={800}
+            layout="fill"
+            objectFit="cover"
             loading="lazy"
-            sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
           />
         </div>
       </div>

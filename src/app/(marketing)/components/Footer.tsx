@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { PlaceHolder } from "@/app/UI/PlaceHolder";
 
 // Server-rendered Footer Section
 const Footer = React.forwardRef<HTMLElement, React.ComponentPropsWithoutRef<"section">>((props, ref) => {
@@ -27,6 +28,7 @@ const Footer = React.forwardRef<HTMLElement, React.ComponentPropsWithoutRef<"sec
 
         {/* Footer Section */}
         <footer className="py-6 flex flex-col justify-center items-center gap-8 sm:gap-20">
+          <PlaceHolder />
           <div className="flex flex-row items-center justify-center text-center sm:space-x-4 space-y-4 sm:space-y-0">
             <Image
               src="/Images/logo.png"
