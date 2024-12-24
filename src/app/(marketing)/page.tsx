@@ -1,24 +1,41 @@
-"use client";
-import React, { useRef, useCallback, useEffect, useState } from "react";
+"use client"; 
+
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import dynamic from "next/dynamic";
+import PulseLoader from "@/app/UI/Loader";  
 
 
-const HeroComponent = dynamic(() => import("./components/Hero"), { ssr: false });
-const TrustedBy = dynamic(() => import("./components/TrustedBy"), { ssr: false });
-const Solutions = dynamic(() => import("./components/Solutions"), { ssr: false });
-const Navbar = dynamic(() => import("../UI/Navbar"), { ssr: false });
-const Footer = dynamic(() => import("./components/Footer"), { ssr: false });
+const HeroComponent = dynamic(() => import("./components/Hero"), { 
+  ssr: false, 
+  loading: () => <PulseLoader /> 
+});
+const TrustedBy = dynamic(() => import("./components/TrustedBy"), { 
+  ssr: false, 
+  loading: () => <PulseLoader /> 
+});
+const Solutions = dynamic(() => import("./components/Solutions"), { 
+  ssr: false, 
+  loading: () => <PulseLoader /> 
+});
+const Navbar = dynamic(() => import("../UI/Navbar"), { 
+  ssr: false, 
+  loading: () => <PulseLoader /> 
+});
+const Footer = dynamic(() => import("./components/Footer"), { 
+  ssr: false, 
+  loading: () => <PulseLoader /> 
+});
 
 const MarketingPage = () => {
   const homeRef = useRef<HTMLElement>(null);
   const solutionsRef = useRef<HTMLElement>(null);
   const requestRef = useRef<HTMLElement>(null);
 
-  // Use state to check if client-side rendering is done
+ 
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    setIsClient(true); // Update after the initial render on the client
+    setIsClient(true); 
   }, []);
 
   const scrollToSection = useCallback((sectionRef: React.RefObject<HTMLElement>) => {
@@ -27,20 +44,19 @@ const MarketingPage = () => {
     }
   }, []);
 
+ 
   if (!isClient) {
-    return null; 
+    return <PulseLoader />; 
   }
 
   return (
     <>
- 
       <Navbar 
         scrollToSection={scrollToSection} 
         homeRef={homeRef} 
         solutionsRef={solutionsRef} 
         requestRef={requestRef} 
       />
-      
       
       <HeroComponent ref={homeRef} />
       <TrustedBy />
