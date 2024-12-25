@@ -14,8 +14,10 @@ model User {
 }
 
 model OnBoardedUser {
-  id        Int    @id @default(autoincrement())
+  id        Int  @id @default(autoincrement())
   wallet    String @unique
+  username  String?
+  image     String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
