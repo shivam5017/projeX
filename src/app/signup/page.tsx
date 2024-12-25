@@ -2,26 +2,21 @@
 import React, { useState, useEffect } from "react";
 import { BgSvg } from "@/app/UI/SVGS/bgsvg";
 import ReactDOMServer from "react-dom/server";
-import { useWallet } from "@solana/wallet-adapter-react";
-import { useRouter } from "next/navigation";
+
 import CustomWalletButton from "../UI/SolanaButton";
 
-const Signup = () => {
-  const router = useRouter();
-  const [isClient, setIsClient] = useState(false);
-  const { connected } = useWallet();
+import "react-toastify/ReactToastify.css";
+import { ToastContainer } from "react-toastify";
 
+const Signup = () => {
+
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
-  useEffect(() => {
-    if (connected) {
-      router.push("/main");
-    }
-  }, [connected, router]);
-
+ 
   const svgString = ReactDOMServer.renderToStaticMarkup(<BgSvg />);
   const base64Svg = `data:image/svg+xml;base64,${btoa(svgString)}`;
 
@@ -50,6 +45,5 @@ const Signup = () => {
     </section>
   );
 };
-
 
 export default Signup;
